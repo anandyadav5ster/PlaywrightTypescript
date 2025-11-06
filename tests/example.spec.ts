@@ -1,18 +1,28 @@
 import { test, expect } from '@playwright/test';
 
-test('has title', async ({ page }) => {
-  await page.goto('https://playwright.dev/');
+test.describe('Automation practice ',() =>{
 
-  // Expect a title "to contain" a substring.
-  await expect(page).toHaveTitle(/Playwright/);
-});
+  test('Home Page',
+    {
+      tag: ['@smoke @regression'],
+      annotation: {type:'test_key', description:'mb-1234'},
+    }, async({page}) =>{
 
-test('get started link', async ({ page }) => {
-  await page.goto('https://playwright.dev/');
+      await page.goto('https://testautomationpractice.blogspot.com/');
+      await expect(page).toHaveTitle('Automation Testing Practice');
 
-  // Click the get started link.
-  await page.getByRole('link', { name: 'Get started' }).click();
+  });
 
-  // Expects page to have a heading with the name of Installation.
-  await expect(page.getByRole('heading', { name: 'Installation' })).toBeVisible();
-});
+  test('Handle locators',
+    {
+      tag:['@locators'],
+      annotation:{type:'test_key', description:'12345'},
+  }, async({page})=>{
+    await page.goto('https://testautomationpractice.blogspot.com/');
+    await page.locator('a[href*="playwrightpractice"]').click();
+    await expect(page).toHaveTitle('Automation Testing Practice: PlaywrightPractice');
+  })
+})
+
+
+
