@@ -1,10 +1,7 @@
-import { test } from '../baseTest';
+import { test } from '../fixture';
 import { expect } from 'playwright/test';
 
 
-test.beforeEach('',async({page})=>{
-  await page.goto('https://testautomationpractice.blogspot.com/');
-})
 test.describe('Automation practice ',() =>{
 
   test('Home Page',
@@ -21,7 +18,7 @@ test.describe('Automation practice ',() =>{
       tag:['@locators'],
       annotation:{type:'test_key', description:'12345'},
   }, async({page})=>{
-    await page.locator('a[href*="playwrightpractice"]').click();
+    
     await expect(page).toHaveTitle('Automation Testing Practice: PlaywrightPractice');
   });
 
@@ -39,8 +36,56 @@ test.describe('Automation practice ',() =>{
   await page.bringToFront();
   const parentWindowTitle = await page.title();
   console.log(parentWindowTitle);
-  })
-});
+  });
+
+  test('handle simple popup', async({page}) =>{
+    // const [popup] = await Promise.all([
+    //   await page.waitForEvent('popup'),
+    //   await page.click('#alertBtn')
+    // ])
+
+    page.on('dialog', async(dialog) =>{
+      console.log('simple aler msg', dialog.message());
+      await dialog.accept();
+    })
+
+     await page.click('#alertBtn');
+     const simpleAlertMsg = await page.locator('#demo').textContent();
+
+
+  });
+
+  test('Handle confirmation popup', async({page})=>{
+    //  await page.click('#alertBtn');
+    page.on('dialog', async (dialog) => {
+    console.log('Dialog message:', dialog.message());
+    
+    // Accept or dismiss based on your need
+    await dialog.accept(); // or dialog.dismiss();
+  });
+  await page.click('#confirmBtn');
+  const popMsg = await page.locator('#demo').textContent();
+  console.log(popMsg);
+  });
+
+test('Handle pop up window', async({context,page}) =>{
+  
+  const [newWin] = await Promise.all([
+    context.waitForEvent('page'),
+    await page.click('#PopUp')
+  ]);
+  await newWin.waitForLoadState();      
+  const newWinTitle: string = await newWin.title();
+  console.log(newWinTitle);
+}) ;
+
+test('Use fixture',
+  {tag:['@orangehrm']}, 
+  async({loggedInPage})=>{
+  const title = await loggedInPage.title();
+})
+
+}); 
 
 
 
