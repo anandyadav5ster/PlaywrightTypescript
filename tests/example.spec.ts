@@ -72,10 +72,10 @@ test.describe('Automation practice ',() =>{
   });
 
 test('Handle pop up window', async({context,page,automationPractice}) =>{
-  
+  await page.goto('https://testautomationpractice.blogspot.com/');
   const [newWin] = await Promise.all([
     context.waitForEvent('page'),
-    await automationPractice.click('#PopUp')
+    await page.click('#PopUp')
   ]);
   await newWin.waitForLoadState();      
   const newWinTitle: string = await newWin.title();
