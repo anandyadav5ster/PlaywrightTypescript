@@ -8,8 +8,8 @@ test.describe('Automation practice ',() =>{
     {
       tag: ['@smoke @regression'],
       annotation: {type:'test_key', description:'mb-1234'},
-    }, async({page}) =>{
-      await expect(page).toHaveTitle('Automation Testing Practice');
+    }, async({page,automationPractice}) =>{
+      await expect(automationPractice).toHaveTitle('Automation Testing Practice: PlaywrightPractice');
 
   });
 
@@ -17,12 +17,13 @@ test.describe('Automation practice ',() =>{
     {
       tag:['@locators'],
       annotation:{type:'test_key', description:'12345'},
-  }, async({page})=>{
+  }, async({page,automationPractice})=>{
     
-    await expect(page).toHaveTitle('Automation Testing Practice: PlaywrightPractice');
+    await expect(automationPractice).toHaveTitle('Automation Testing Practice: PlaywrightPractice');
   });
 
   test('Handle new tab',async({context, page}) =>{
+    await page.goto('https://testautomationpractice.blogspot.com/');
       const [newTab] = await Promise.all([
         context.waitForEvent('page'),
         page.locator('button[onClick="myFunction()"]').filter({hasText:'New Tab'}).click(),
@@ -38,41 +39,43 @@ test.describe('Automation practice ',() =>{
   console.log(parentWindowTitle);
   });
 
-  test('handle simple popup', async({page}) =>{
+  test('handle simple popup', async({page,automationPractice}) =>{
+    await page.goto('https://testautomationpractice.blogspot.com/');
     // const [popup] = await Promise.all([
     //   await page.waitForEvent('popup'),
     //   await page.click('#alertBtn')
     // ])
 
-    page.on('dialog', async(dialog) =>{
+    automationPractice.on('dialog', async(dialog) =>{
       console.log('simple aler msg', dialog.message());
       await dialog.accept();
     })
 
-     await page.click('#alertBtn');
-     const simpleAlertMsg = await page.locator('#demo').textContent();
+     await automationPractice.click('#alertBtn');
+     const simpleAlertMsg = await automationPractice.locator('#demo').textContent();
 
 
   });
 
-  test('Handle confirmation popup', async({page})=>{
+  test('Handle confirmation popup', async({page,automationPractice})=>{
     //  await page.click('#alertBtn');
+    await page.goto('https://testautomationpractice.blogspot.com/');
     page.on('dialog', async (dialog) => {
     console.log('Dialog message:', dialog.message());
     
     // Accept or dismiss based on your need
     await dialog.accept(); // or dialog.dismiss();
   });
-  await page.click('#confirmBtn');
+  await automationPractice.click('#confirmBtn');
   const popMsg = await page.locator('#demo').textContent();
   console.log(popMsg);
   });
 
-test('Handle pop up window', async({context,page}) =>{
+test('Handle pop up window', async({context,page,automationPractice}) =>{
   
   const [newWin] = await Promise.all([
     context.waitForEvent('page'),
-    await page.click('#PopUp')
+    await automationPractice.click('#PopUp')
   ]);
   await newWin.waitForLoadState();      
   const newWinTitle: string = await newWin.title();
