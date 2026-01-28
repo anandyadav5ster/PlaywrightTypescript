@@ -3,7 +3,7 @@ import { expect } from 'playwright/test';
 
 
 
-test.describe('Automation practice ',() =>{
+test.describe('Automation practice ',() => {
 
   test('Home Page',
     {
@@ -13,9 +13,6 @@ test.describe('Automation practice ',() =>{
       await expect(automationPractice).toHaveTitle('Automation Testing Practice: PlaywrightPractice');
 
   });
-
-
-
 
 
 test('Use fixture', async({loggedInPage})=>{
