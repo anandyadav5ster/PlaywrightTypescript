@@ -1,0 +1,21 @@
+{
+    "en": { 
+        "buttons": 
+        {
+            "Primary Action": "Primary Action",
+            "Toggle Button": "Toggle Button",
+            "Submit_Form": "Submit Form"
+           
+
+        },
+        "Links":{
+            "Link":"link"
+        },
+        "alert":{
+            "SimpleAlert" : "Simple Alert",
+            "ConfirmDialog": "Confirmation Alert",
+            "PromptAlert": "Prompt Alert",
+            "NewTab": "New Tab"
+        }
+    }
+}

@@ -17,6 +17,7 @@
   "homepage": "https://github.com/anandyadav5ster/PlaywrightTypescript#readme",
   "devDependencies": {
     "@playwright/test": "^1.56.1",
-    "@types/node": "^24.10.0"
+    "@types/node": "^24.10.0",
+    "playwright-bdd": "^8.4.2"
   }
 }
