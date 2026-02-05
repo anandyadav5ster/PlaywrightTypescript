@@ -1,0 +1,100 @@
+00:00  Intro
+00:46  Step 1 - Create a new file under test folder
+02:15  Step 2 - Add module ‘playwright/test’
+
+const { test, expect } = require('@playwright/test');
+
+05:35  Example how to add and import modules
+
+12:48  Playwright Test provides a test function to declare tests and expect function to write assertions
+13:10  Step 3 - Create a test block - test(title, testFunction)
+
+test('My First Test',  async ({page}) =＞ {
+    await page.goto('https://google.com');
+    await expect(page).toHaveTitle('Google');
+})
+17:20  
+The keyword async before a function makes the function return a promise
+The keyword await before a function makes the function wait for a promise
+
+How to record test - Test Generator
+Playwright comes with a tool - Codegen also called Test Generator
+Can be used to record test and generate test scripts
+It Opens 2 windows
+A browser window to interacts with the website
+Playwright Inspector window to record test
+
+00:00 Intro
+
+01:18 What is Codegen
+
+02:14 Step 1 - Open terminal and run codegen   npx playwright codegen
+
+03:04 Step 2 - Check 2 windows open - Browser and Playwright Inspector
+
+04:57 Step 3 - Record your test steps and check the test scripts getting created
+
+06:43 Step 4 - Save the recorded script in a test file | Run and check
+
+10:40 Can also add the url npx playwright codegen google.com
+
+11:48 See all options  npx playwright codegen --help
+
+13:33 Screenshot moment
+
+13:54 Record on a specific browser (default:chromium) npx playwright codegen --browser firefox
+
+15:32 Record and save to a file  npx playwright codegen --target javascript -o record_example.js
+
+21:27 Set viewport - screen resolution (size)  npx playwright codegen --viewport-size=800,600
+
+22:52 Emulate devices  npx playwright codegen --device="iPhone 11"
+
+25:15 Emulate color scheme (if available) npx playwright codegen --color-scheme=dark
+
+
+
+01:05  What is Trace Viewer
+Trace Viewer is a GUI tool that helps viewing the executed test along with snapshots, timeline and other details (traces)
+
+03:14  How to use Trace Viewer
+Step 1 - Open config file and set  trace: 'on-first-retry'
+It means - Collect trace when retrying the failed test for the 1st time only
+Step 2 - Save and Run a test to fail 
+Step 3 - Check trace.zip file created under test-results folder
+Step 4 - View trace - npx playwright show-trace trace.zip
+
+14:28  Screenshot moment
+ 
+14:34  Trace Viewer Options
+'on-first-retry'  - Record a trace only when retrying a test for the first time.
+'off'       - Do not record a trace.
+'on'       - Record a trace for each test. (not recommended as it's performance heavy)
+'retain-on-failure' - Record a trace for each test, but remove it from successful test runs
+
+To set trace on from command   npx playwright test --trace on
+15:56  Different ways to view trace
+Using command - npx playwright show-trace trace.zip
+Using HTML Report
+Using utility - https://trace.playwright.dev/
+
+17:12  How to set Tracing programmatically
+
+test.only('test demo', async ({ page, context }) =＞ {
+ await context.tracing.start({snapshots: true, screenshots: true})
+ // test code
+ await context.tracing.stop({path: 'test-trace.zip'});
+});
+
+let context
+let page
+test.beforeAll(async ({ browser }) =＞ {
+ context = await browser.newContext()
+ await context.tracing.start({ screenshots: true, snapshots: true })
+ page = await context.newPage()
+})
+
+test.afterAll(async () =＞ {
+ await context.tracing.stop({ path: 'test-trace.zip' });
+})
+
