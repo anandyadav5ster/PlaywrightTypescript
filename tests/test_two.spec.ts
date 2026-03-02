@@ -2,6 +2,7 @@ import { expect, request, test } from '@playwright/test';
 import { Locators } from '../Locators/locators';
 import translation from '../test-data/translation.json';
 import {Functions} from '../Functions/functions'
+import { link } from 'fs';
 
 let locators: Locators;
 let functions: Functions;
@@ -161,4 +162,57 @@ test('Handle hover', async({page}) =>{
 test('Handle broken images', async({page, request}) =>{
     await page.goto('https://the-internet.herokuapp.com/broken_images');
    
-})
+});
+
+test('Handle broken links', async({page}) =>
+    {
+
+    await page.goto('https://testautomationpractice.blogspot.com/p/playwrightpractice.html');
+    const links = await page.locator('#broken-links>a');
+    const alllinks = await links.all();
+    const alllinksHref = await Promise.all(
+        alllinks.map(link => link.getAttribute('href'))
+    );
+       const validHref = alllinksHref.reduce((links, link) =>{
+        if(link && !link?.startsWith('malito') && !link?.startsWith('#'))
+            links.add(link)
+        return links
+       },new Set<string>())
+
+       for(const url of validHref){
+        try {
+        const response = await page.request.get(url);
+        expect.soft(`${url} is valid ${response.ok()}`)
+   
+    } catch{
+        expect.soft(`${url} is not valid}`);
+    }
+       }
+    });
+
+test('Handle API mocking_1', async({page}) =>{
+  
+  const baseURL:string = 'https://www.example.com';
+  const targetURL:string = '**/api/productList';
+    
+  await page.route(targetURL, async(route) => {
+    const mockData = [{id:123, name:'James'}];
+    await route.fulfill({
+      status: 200,
+      contentType: 'application/json',
+      body: JSON.stringify(mockData)
+      
+    });
+  });
+  
+  await page.goto(baseURL);
+  const responseBody = await page.evaluate(async(ur) =>{
+    const response = await fetch('https://www.example.com/api/productList');
+    return {
+      status: response.status,
+      body: await response.json()
+    }
+  });
+  console.log(`Mocking response body is ${JSON.stringify(responseBody.body)}`)
+  
+});
