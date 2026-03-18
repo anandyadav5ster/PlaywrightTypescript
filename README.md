@@ -13,6 +13,7 @@ ENV=staging npx playwright test handle_mul_env.ts
 https://medium.com/@irfan17sat/configuring-multiple-environments-in-playwright-67e402c1c627
 
 jenkins parameter command
+java -jar jenkins.war --httpPort=9090
 npx playwright test %TestCasesToRun% --project=%Browser% %Headed%
 
 ========================================
