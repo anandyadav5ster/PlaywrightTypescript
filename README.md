@@ -11,3 +11,18 @@ $env:ENV="staging"; npx playwright test
 ENV=staging npx playwright test handle_mul_env.ts
 
 https://medium.com/@irfan17sat/configuring-multiple-environments-in-playwright-67e402c1c627
+
+jenkins parameter command
+npx playwright test %TestCasesToRun% --project=%Browser% %Headed%
+
+========================================
+JSON
+"scripts": {
+  "test:stage": "cross-env ENV=staging npx playwright test",
+  "test:dev": "cross-env ENV=dev npx playwright test"
+}
+Run in Jenkins:
+
+Bash
+npm run test:stage -- --project=chromium
+===============================================

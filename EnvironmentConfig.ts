@@ -18,7 +18,7 @@ const dev: EnvConfig = {
 };
 
 const staging: EnvConfig = {
-    baseUrl: 'https://staging.automationexercise.com',
+    baseUrl: 'https://www.statsig.com/perspectives/staging-environment-best-practices',
     apiUrl: 'https://staging.automationexercise.com/api',
     adminUser: 'staging_admin@test.com',
     dbName: 'staging_db'
@@ -34,5 +34,5 @@ const prod: EnvConfig = {
 // Logic to select the environment based on the 'ENV' system variable
 const environments: Record<string, EnvConfig> = { dev, staging, prod };
 const selectedEnv = process.env.ENV || 'dev'; // Default to 'dev' if not specified
-
+console.log(`--- DEBUG: Running in [${selectedEnv}] environment ---`); // Add this line
 export const CONFIG = environments[selectedEnv];

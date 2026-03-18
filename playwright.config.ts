@@ -10,6 +10,8 @@ import path from 'path';
 // import path from 'path';
 // dotenv.config({ path: path.resolve(__dirname, '.env') });
 
+// Fallback to 'dev' if no environment is provided;
+
 // Define where the authentication state will be stored
 export const STORAGE_STATE = path.join(__dirname, '.auth/user.json');
 
