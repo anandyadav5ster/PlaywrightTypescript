@@ -13,7 +13,7 @@ test('My First Test',  async ({page}) =＞ {
     await page.goto('https://google.com');
     await expect(page).toHaveTitle('Google');
 })
-17:20  
+ 
 The keyword async before a function makes the function return a promise
 The keyword await before a function makes the function wait for a promise
 
@@ -98,3 +98,84 @@ test.afterAll(async () =＞ {
  await context.tracing.stop({ path: 'test-trace.zip' });
 })
 
+Design Framework
+https://www.testrail.com/blog/test-automation-framework-design/
+
+Design Pattern
+https://www.geeksforgeeks.org/system-design/singleton-design-pattern/
+
+SDLC
+Requirement Analyis
+Design
+Developed
+Testing
+Deployment
+Maintainance
+
+STLC
+Test Planning
+Test Case Development
+Test Environemnt Setup
+Test Case Execution
+Test Closure
+
+Bug life Cycle
+New
+Assigned
+Open--> Reopen/Duplicate/Rejected/Deffered
+Fixed
+Pending Retest
+Retest
+Verified
+Close
+
+==========================
+Types of Waits in Playwright
+// Wait for an element to disappear
+await loader.waitFor({ state: 'hidden', timeout: 15000 });
+
+await page.waitForURL(/.*dashboard/);
+await page.waitForLoadState('networkidle'); 
+await page.waitForResponse
+
+Common Assertion Methods (Web-First)
+expect(locator).toBeVisible()
+
+Element is visible to the user.
+
+expect(locator).toBeHidden()
+
+Element is either detached or hidden.
+
+expect(locator).toBeEnabled()
+
+Element is not disabled.
+
+expect(locator).toBeChecked()
+
+Checkbox or radio button is selected.
+
+expect(locator).toHaveText('text')
+
+Matches the exact text content.
+
+expect(locator).toContainText('text')
+
+Element contains the substring.
+
+expect(locator).toHaveValue('value')
+
+Input field has the specific value.
+
+expect(locator).toHaveAttribute('name', 'val')
+
+Element has the specified attribute.
+
+expect(page).toHaveURL(/regex/)
+
+Page URL matches the pattern.
+
+expect(page).toHaveTitle(/regex/)
+
+Page Title matches the pattern.
+========================================
