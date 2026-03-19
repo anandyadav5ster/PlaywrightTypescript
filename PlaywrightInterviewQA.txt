@@ -179,3 +179,87 @@ expect(page).toHaveTitle(/regex/)
 
 Page Title matches the pattern.
 ========================================
+1. Parallel Execution (Speed)
+
+This is the default for Playwright across different files. It runs multiple tests at the exact same time.
+
+Behavior: Each test gets its own worker (or shares a worker concurrently if fullyParallel is on).
+
+Best For: Independent tests that don't share data or state.
+
+Syntax: test.describe.configure({ mode: 'parallel' });
+
+2. Serial Execution (Dependency)
+
+In serial mode, tests in a single file are executed one after another in the same worker.
+
+Behavior: If one test fails, all subsequent tests in that file are skipped.
+
+Best For: Interdependent steps (e.g., Test 1 creates a resource, Test 2 edits it, Test 3 deletes it).
+
+Syntax: test.describe.configure({ mode: 'serial' })
+============================================================
+If fullyParallel is on: Tests run in parallel (using multiple workers).
+
+If fullyParallel is off: Tests run sequentially in a single worker.
+======================================================================
+If fullyParallel is OFF (Default)
+Across Files: Playwright starts both files simultaneously. Worker 1 takes Class One, and Worker 2 takes Class Two.
+
+Inside the Files: * Worker 1 runs the 5 tests in Class One one after another (sequentially).
+
+Worker 2 runs the 4 tests in Class Two one after another (sequentially).
+
+If fullyParallel is ON
+Across Files: Both files start at the same time.
+
+Inside the Files: Playwright will attempt to run all 9 tests simultaneously using up to 9 different workers (depending on your hardware and workers configuration).
+
+Summary: Your "classes" (files) will always run at the same time; the setting only determines if the 5 tests inside Class One wait for each other or run all at once.
+===========================================
+https://www.geeksforgeeks.org/javascript/difference-between-generators-and-iterators-in-javascript/
+Difference between Generators and Iterators in JavaScript
+Last Updated : 11 Dec, 2023
+Generators
+The Generators are a special type of function in JavaScript that can be paused and resumed during their execution. They are defined using the asterisk (*) after the function keyword. The Generators use the yield keyword to yield control back to the caller while preserving their execution context. The Generators are useful for creating iterators, asynchronous code, and handling sequences of data without loading all the data into the memory at once.
+
+Example: In this example, we will see a simple generator function that yields values in the sequence.
+
+
+
+
+function* GFG() {
+    yield 10;
+    yield 20;
+    yield 30;
+}
+const generator = GFG();
+console.log(generator.next().value);
+console.log(generator.next().value);
+console.log(generator.next().value);
+
+Output
+10
+20
+30
+Iterators
+The Iterators are objects with a special structure in JavaScript. They must have a next() method that returns an object with the value and done properties. The value property represents the next value in the sequence and the done property indicates whether there are more values to be iterated. The Iterators are commonly used for iterating over data structures like arrays, maps, and sets.
+
+Example: In this example, we will see an iterator looping through an array.
+
+
+
+
+const colors = ['red', 'green', 'blue'];
+const GFG = colors[Symbol.iterator]();
+console.log(GFG.next());
+console.log(GFG.next());
+console.log(GFG.next());
+console.log(GFG.next());
+
+Output
+{ value: 'red', done: false }
+{ value: 'green', done: false }
+{ value: 'blue', done: false }
+{ value: undefined, done: true }
+=================================================

@@ -1,0 +1,26 @@
+{
+  "admin": {
+    "username": "admin_user",
+    "password": "secure_password123"
+  },
+  "users": [
+    {
+      "id": 1,
+      "username": "alice_test",
+      "password": "password_abc",
+      "email": "alice@example.com"
+    },
+    {
+      "id": 2,
+      "username": "bob_test",
+      "password": "password_xyz",
+      "email": "bob@example.com"
+    },
+    {
+      "id": 3,
+      "username": "charlie_test",
+      "password": "password_789",
+      "email": "charlie@example.com"
+    }
+  ]
+}
