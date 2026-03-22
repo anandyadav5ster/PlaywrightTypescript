@@ -26,6 +26,7 @@
   "dependencies": {
     "@playwright/mcp": "^0.0.68",
     "csv-parse": "^6.2.0",
+    "dotenv": "^17.3.1",
     "xlsx": "^0.18.5"
   }
 }

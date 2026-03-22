@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test';
+import { test } from '@playwright/test';
 import {parse} from 'csv-parse';
 import fs from 'fs';
 

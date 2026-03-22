@@ -21,3 +21,23 @@ test.describe('JSON Data Driven Suite', () => {
         });
     }
 });
+
+//plan way to read jsonData
+
+
+/* const data = {"users" : [
+    {
+        "id": 1,
+       "username": "alice_test",
+      "password": "password_abc",
+      "email": "alice@example.com"
+    }
+]
+}
+
+const users = data.users
+console.log(users);
+
+for( const user of users){
+    console.log(user.username)
+} */

@@ -263,3 +263,92 @@ Output
 { value: 'blue', done: false }
 { value: undefined, done: true }
 =================================================
+
+Page Object Model
+import { expect, type Locator, type Page } from '@playwright/test';
+
+export class PlaywrightDevPage {
+  readonly page: Page;
+  readonly getStartedLink: Locator;
+  readonly gettingStartedHeader: Locator;
+  readonly pomLink: Locator;
+  readonly tocList: Locator;
+
+  constructor(page: Page) {
+    this.page = page;
+    this.getStartedLink = page.locator('a', { hasText: 'Get started' });
+    this.gettingStartedHeader = page.locator('h1', { hasText: 'Installation' });
+    this.pomLink = page.locator('li', {
+      hasText: 'Guides',
+    }).locator('a', {
+      hasText: 'Page Object Model',
+    });
+    this.tocList = page.locator('article div.markdown ul > li > a');
+  }
+
+  async goto() {
+    await this.page.goto('https://playwright.dev');
+  }
+
+  async getStarted() {
+    await this.getStartedLink.first().click();
+    await expect(this.gettingStartedHeader).toBeVisible();
+  }
+
+  async pageObjectModel() {
+    await this.getStarted();
+    await this.pomLink.click();
+  }
+}
+==================================Test==============================
+import { test, expect } from '@playwright/test';
+import { PlaywrightDevPage } from './playwright-dev-page';
+
+test('getting started should contain table of contents', async ({ page }) => {
+  const playwrightDev = new PlaywrightDevPage(page);
+  await playwrightDev.goto();
+  await playwrightDev.getStarted();
+  await expect(playwrightDev.tocList).toHaveText([
+    `How to install Playwright`,
+    `What's Installed`,
+    `How to run the example test`,
+    `How to open the HTML test report`,
+    `Write tests using web first assertions, page fixtures and locators`,
+    `Run single test, multiple tests, headed mode`,
+    `Generate tests with Codegen`,
+    `See a trace of your tests`
+  ]);
+});
+
+test('should show Page Object Model article', async ({ page }) => {
+  const playwrightDev = new PlaywrightDevPage(page);
+  await playwrightDev.goto();
+  await playwrightDev.pageObjectModel();
+  await expect(page.locator('article')).toContainText('Page Object Model is a common pattern');
+});
+
+=============================Generating==================
+1. Gnernerating locator by recoding
+===================================================
+Emulate geolocation, language and timezone
+npx playwright codegen --timezone="Europe/Rome" --geolocation="41.890221,12.492348" --lang="it-IT" bing.com/maps
+==========================Visual comparison===============
+ await expect(page).toHaveScreenshot({ maxDiffPixels: 100 });
+expect(await page.textContent('.hero__title')).toMatchSnapshot('hero.txt');
+============================================================
+Types of wait 
+page.waitForSelector(selector, { state: '...' }): Waits for an element to satisfy a certain state (e.g., 'attached', 'visible', 'hidden', or 'detached').
+page.waitForURL(url): Waits for the page to navigate to a specific URL pattern.
+page.waitForLoadState(state): Waits for the page to reach a specific load state like 'load' or 'domcontentloaded'.
+page.waitForResponse(urlOrPredicate) / page.waitForRequest(urlOrPredicate): Pauses the test until a network request or response matching the criteria is observed.
+Static Waits (Avoid): page.waitForTimeout(milliseconds) pauses the test execution for a fixed duration.
+
+powershel command
+$env:USER_NAME=me
+$env:PASSWORD=secret
+npx playwright test
+
+batch command
+set USER_NAME=me
+set PASSWORD=secret
+npx playwright test
