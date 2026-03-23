@@ -1,6 +1,6 @@
- import { test, expect, type Locator, type Page } from '@playwright/test';
+import { test, expect, type Locator, type Page } from '@playwright/test';
 
- export class PlaywrightDevPage {
+export class PlaywrightDevPage {
 
     readonly page: Page;
     readonly getStarted: Locator;
