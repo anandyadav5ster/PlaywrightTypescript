@@ -1,6 +1,7 @@
 import { defineConfig, devices } from '@playwright/test';
 import path from 'path';
-import * as dotenv from 'dotenv';
+// import * as dotenv from 'dotenv';
+import dotenv from 'dotenv';
 
 /**
  * Load environment variables from .env file.
@@ -12,20 +13,25 @@ dotenv.config();
 const env = process.env.ENVIRONMENT;
 if(!env)
     throw new Error('❌ ENVIRONMENT variable is missing! Please set it in your .env file or CLI (e.g., ENVIRONMENT=dev).');
-
-const Base_URL = `https://${env}.automationexercise.com`;
-/*  const Base_URL = () => {
+else{
+  console.log(`Default environment is ${env}`)
+}
+// const Base_URL = `https://${env}.automationexercise.com`;
+const Base_URL = () => {
   const env = process.env.ENVIRONMENT || 'dev';
     switch(env){
 
       case 'dev':
         return `https://${env}.automationexercise.com`;
       case 'staging':
-        return `https://${env}.automationexercise.com`;  
-
+        return `https://${env}.automationexercise.com`;
+      default:
+        const err = new Error("❌ Please enter valid environment");
+        err.stack = ""; // This removes the file path and line numbers
+        throw err;
+  
     }
-
- } */
+  }
 
 
 // 2. Define Authentication Storage Path
@@ -51,8 +57,8 @@ export default defineConfig({
 
   use: {
     headless: true,
-    // baseURL: Base_URL(),
-    baseURL: Base_URL,
+    baseURL: Base_URL(),
+    // baseURL: Base_URL,
     
     // 4. Global State Injection
     // Every test will start with the cookies/storage found in this file
