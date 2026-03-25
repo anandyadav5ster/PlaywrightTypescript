@@ -85,3 +85,9 @@ mcp.json
     }
   }
 }
+=========================================
+implemented report porta in page_object_model.spec.ts
+1.rpToken is fixture passing.
+checking if the token is already exist or not 
+const tokenPath = 'auth/rp_token.txt';
+if the token is not available then running the test to get the token.

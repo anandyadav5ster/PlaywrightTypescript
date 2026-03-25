@@ -2,7 +2,39 @@ import { defineConfig, devices } from '@playwright/test';
 import path from 'path';
 // import * as dotenv from 'dotenv';
 import dotenv from 'dotenv';
+import fs from 'fs';
 
+
+const getRPToken = () => {
+  const tokenPath = 'auth/rp_token.txt';
+  if (fs.existsSync(tokenPath)) {
+    const fileToken = fs.readFileSync(tokenPath, 'utf-8').trim();
+    if (fileToken) return fileToken;
+  }
+  return process.env.RP_TOKEN || 'PENDING_GENERATION'; 
+};
+
+const RP_TOKEN = getRPToken();
+const RP_ENDPOINT = "https://demo.reportportal.io/api/v1";
+const RP_PROJECT = "anandyadav5ster_personal";
+
+const RP_CONFIG = {
+  apiKey: RP_TOKEN,
+  endpoint: RP_ENDPOINT,
+  project: RP_PROJECT,
+  launch: `Playwright`,
+  description: 'Automated test run from Playwright',
+  attributes: [
+    {
+      key: "attributeKey",
+      value: "attrbiuteValue",
+    },
+    {
+      value: "anotherAttrbiuteValue",
+    },
+  ],
+  mode: 'DEFAULT',
+};
 /**
  * Load environment variables from .env file.
  */
@@ -52,7 +84,8 @@ export default defineConfig({
 
   reporter: [
     ['html', { open: 'never', outputFolder: 'playwright-report' }],
-    ['list']
+    ['list'],
+    ['@reportportal/agent-js-playwright', RP_CONFIG]
   ],
 
   use: {
@@ -72,7 +105,7 @@ export default defineConfig({
   projects: [
     {
       name: 'chromium',
-      use: { ...devices['Desktop Chrome'] },
+      use: { ...devices['Desktop Chrome'], headless: false },
     },
   ],
 });
