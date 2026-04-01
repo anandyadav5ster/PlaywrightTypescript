@@ -85,7 +85,7 @@ export default defineConfig({
   reporter: [
     ['html', { open: 'never', outputFolder: 'playwright-report' }],
     ['list'],
-    ['@reportportal/agent-js-playwright', RP_CONFIG]
+    // ['@reportportal/agent-js-playwright', RP_CONFIG]
   ],
 
   use: {

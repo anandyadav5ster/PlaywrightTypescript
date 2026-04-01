@@ -1,5 +1,5 @@
 import { test,expect } from '../fixture';
-import { PlaywrightDevPage} from './PlaywrightDevPage';
+import { PlaywrightDevPage} from '../Pages/PlaywrightDevPage';
 
 
 

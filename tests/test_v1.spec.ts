@@ -3,20 +3,20 @@ import {parse} from 'csv-parse/sync';
 import fs from 'fs';
 
 test('Verify api mocking', async ({page}) =>{
-     await page.route('**/api/v1/fruits', async route =>{
-	  const mockData = [{id: 91, name: 'India'}];
-	  
-	  await route.fulfill({
-	   status: 200,
-	   body: mockData,
-	   contentType: 'application/json'
-	  });
-	  
-	  const responsePromise = page.waitForResponse('**/api/v1/fruits');
-	  await page.goto('https://demo.playwright.dev/api-mocking');
-	  const response = await responsePromise;
-	  await expect(response.status()).toBe(200);
-	  await expect(page.getByText('India')).toBeVisible();
+    await page.route('**/api/v1/fruits', async route =>{
+	const mockData = [{id: 91, name: 'India'}];
+
+	await route.fulfill({
+		status: 200,
+		body: mockData,
+		contentType: 'application/json'
+	});
+
+		const responsePromise = page.waitForResponse('**/api/v1/fruits');
+		await page.goto('https://demo.playwright.dev/api-mocking');
+		const response = await responsePromise;
+		await expect(response.status()).toBe(200);
+		await expect(page.getByText('India')).toBeVisible();
 	 });
 });
 
