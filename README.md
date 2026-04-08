@@ -49,7 +49,7 @@ Snapshot Perception: After every action, the server sends back a YAML snapshot o
 Why this matters: The AI "sees" roles (button, textbox) and labels (Submit, Password) rather than just pixels, making its next step highly accurate. 
 ThinkPalm
 ThinkPalm
- +4
+ 
 3. The Self-Healing Loop (When things break)
 If a locator fails (e.g., a button ID changed from #login-old to #login-new), the Healer Agent kicks in: 
 YouTube
@@ -117,3 +117,12 @@ Debug tests with the Playwright Inspector
 To debug all tests, run the Playwright test command followed by the --debug flag.
 
 npx playwright test --debug
+
+npx playwright test --grep=demotag
+
+Or if you want the opposite, you can skip the tests with a certain tag:
+npx playwright test --grep-invert @fast
+
+Profiling test execution duration
+To get a list of the slowest 10 test durations over 1.0s long:
+pytest --durations=10 --durations-min=1.0

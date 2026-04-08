@@ -15,7 +15,7 @@ test.describe('Automation Exercise: API to UI Integration', () => {
     password: 'Password123'
   };
 
-  test('should authenticate via API and verify login in UI', async ({ page, playwright }) => {
+  test('should authenticate via API and verify login in UI', async ({ page }) => {
     // 1. Create an isolated API context to perform the login
     const apiContext: APIRequestContext = await request.newContext({
       baseURL: baseUrl

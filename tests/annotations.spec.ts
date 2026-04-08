@@ -1,11 +1,11 @@
 import { test, expect } from '@playwright/test';
 
 test.skip('mark skip this test', async ({ page }) => {
-  // Run only focused tests in the entire project.
+  console.log('Skip test');
 });
 
 test.fail('mark fail this test', async ({ page }) => {
-  // Run only focused tests in the entire project.
+  console.log('fail test')
 });
 
 test('mark slow this test', async ({ page }) => {
@@ -14,5 +14,5 @@ test('mark slow this test', async ({ page }) => {
 });
 
 test.fixme('mark fixme this test', async ({ page }) => {
-  // Run only focused tests in the entire project.
+  console.log('fixme test')
 });

@@ -352,3 +352,31 @@ batch command
 set USER_NAME=me
 set PASSWORD=secret
 npx playwright test
+====================================
+25. Intermittent Test Failures (Flaky Tests) 
+Isolate: Determine if it’s the code, the environment (network/latency), or the test itself (race conditions).
+Analyze Logs: Check execution screenshots, video recordings, and console logs at the exact timestamp of failure.
+Stability Check: Run the specific test in a loop (e.g., 50 times) to see the failure rate.
+Fix: Avoid hard-coded waits; use dynamic waits (Wait Until Element Visible) and ensure a clean state before each test. 
+26. Dev vs. QA Environment Issues
+Check Configurations: Compare environment variables, database versions, and API endpoints. Often, QA has restricted permissions or different data.
+Build Version: Verify that the exact build/commit deployed in Dev is what reached QA.
+Data Consistency: Ensure the QA database isn't corrupted or missing specific test data required for the feature.
+Network/Firewall: Check if QA environment restrictions (firewalls/VPNs) are blocking specific service calls. 
+27. Proceeding with an Unstable Build
+Sanity First: Run a Sanity/Smoke suite to identify if core modules (Login, Payments, etc.) are broken.
+Stop Testing: If basic functionality fails, reject the build and inform stakeholders immediately to save time.
+Partial Testing: If only one module is unstable, block that area and continue testing independent, stable modules.
+Report: Provide a "Blocked" status report highlighting the specific blockers preventing full testing. 
+28. Prioritizing Under Tight Deadlines 
+Risk-Based Testing: Focus on high-risk, high-impact features (e.g., the "Happy Path" and core business logic).
+P0/P1 Cases: Execute Critical (P0) and High (P1) priority test cases first; defer Low-priority UI or cosmetic bugs.
+Regression: Run an automated regression suite to ensure existing features didn't break.
+Communication: Flag the risks to the Project Manager—be clear about what will and will not be tested.
+
+29. Critical Prod Bug Reported by Client
+Reproduce: Immediately try to replicate the bug in the Staging/QA environment using the client's steps.
+Triage: Assess the impact. If it's a "showstopper," it needs a Hotfix.
+Root Cause (RCA): Once fixed, perform a Root Cause Analysis. Why was this missed? (Missing test case? Environment difference?)
+Update Suite: Add a new test case to the regression suite to ensure this specific bug never happens again. 
+Would you like a template for a Root Cause Analysis (RCA) report to use for question 29?

@@ -29,8 +29,8 @@ test.describe('JSON Data Driven Suite', () => {
     {
         "id": 1,
        "username": "alice_test",
-      "password": "password_abc",
-      "email": "alice@example.com"
+       "password": "password_abc",
+       "email": "alice@example.com"
     }
 ]
 }

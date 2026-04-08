@@ -1,6 +1,6 @@
 /* let x = 1;
 x = ++x;
-console.log(x);
+console.log(x); //2
 */
 /*
 let obj = {age: 24};
@@ -8,6 +8,18 @@ let {age:userage}= obj;
 console.log(userage);//24
 console.log(age); //error output
 main.ts:8:13 - error TS2304: Cannot find name 'age'.
+
+When you write let {age: userage} = obj;, you are telling JavaScript:
+Look for the property age inside the object.
+Create a new variable named userage and assign the value to it. 
+Because you renamed it to userage, the variable age is never actually created in your scope. That is why console.log(age) throws a ReferenceError. 
+To fix it:
+If you want to use the name age, simply don't use the colon:
+javascript
+let { age } = obj; 
+console.log(age); // 24
+
+
 8 console.log(age);
 */
 
@@ -52,7 +64,7 @@ so the loop stops.
 The Delay Passess: After 1000ms, the two scheduled setTimeout functions finally run.
 
 The Result: When they look for the value of i, they both look at the same shared variable,
-which is now 2.    
+which is now 2.
 */
 
 //console.log(1 || 2 && 3) // 1
@@ -104,7 +116,7 @@ Due to type coersion javascript will convert the num to string
 */
 
 // const [x, y=5] = [10];
-// console.log(x+y); 15
+// console.log(x+y); //15
 
 /*
 Here x will assign to 10 and y assign to undefined, but default value is 5.So y is 5
