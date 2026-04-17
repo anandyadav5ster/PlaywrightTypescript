@@ -2,6 +2,25 @@ import { test } from '@playwright/test';
 
 test.describe('Coding questions', async () => {
 
+    test('Reverse alternate index word ', () => {
+        // Hello Anand How are you
+        // reverse Anand, are
+
+        function reverseAlternateIndex() {
+            const str: string = "Hello Anand How are you";
+            const words = str.split(' ');
+            let reverse = '';
+            const result = words.map((word, index) => {
+                if (index % 2 !== 0) {
+                    return word.split('').reverse().join('');
+                }
+                return word;
+            })
+
+            return result.join(' ');
+        }
+        console.log(reverseAlternateIndex());
+    })
     test('Fabonacci Series', () => {
         function fabonacciSeries(n: number) {
             let curr = 1;
@@ -20,6 +39,17 @@ test.describe('Coding questions', async () => {
         };
 
         fabonacciSeries(10);
+    });
+    test('fabonacci store result in variable', () => {
+        let prev: number = 0;
+        let curr: number = 1;
+        let result: number[] = [];
+
+        for (let i = 0; i <= 10; i++) {
+            result.push(prev);
+            [[prev], [curr]] = [[curr], [curr + prev]];
+        }
+        console.log(result.join(','));
     });
     test('reverse string', () => {
         function reverseString() {
@@ -64,19 +94,6 @@ test.describe('Coding questions', async () => {
         palindrome('Bangalore');
         palindrome('madam');
 
-    });
-
-    test('Find duplicate characters in a string', () => {
-        //Find duplicate characters in a string
-        function findDuplicate(str: string) {
-            let newStr = '';
-            for (const s of str) {
-                newStr.includes(s) ? newStr += s : '';
-            }
-            console.log(newStr);
-        }
-
-        findDuplicate('bangalore');
     });
 
 
@@ -252,7 +269,19 @@ test.describe('Coding questions', async () => {
         console.log(removeDuplicate('Bangalore'))
     });
 
+    test('Generic reversed method', () => {
+        function reverse<T extends string | number>(item: T): T {
+            const str = item.toString().toLowerCase();
+            let reversed = str.split('').reverse().join('');
 
+            const result = typeof item === 'number' ? Number(reversed) : reversed;
+            console.log(result);
+            return result as T;
+
+        }
+        reverse('Bangalore')
+        reverse(1234)
+    })
 
     test('Remove duplicate generic', () => {
         function removeDuplicateGeneric<T extends string | any[]>(item: T): T {
@@ -414,6 +443,72 @@ test.describe('Coding questions', async () => {
             }
         }
         findPrime(10)
+    })
+    test("Find the sum combnation equals to target", () => {
+        const a = [2, 3, 5, 7, 6, 8, 1];
+        const n = a.length
+        const target = 9;
+
+        for (let i = 0; i < n; i++) {
+            for (let j = i + 1; j < n; j++) {
+                if (a[i] + a[j] == target) {
+                    console.log(`Numbers are (${a[i]},${a[j]}) and index are (${i},${j})`);
+                }
+            }
+        }
+    });
+
+    test('print the string count ', () => {
+        let str = "Anand";
+        str = str.toLowerCase().replace(/\s/g, '');
+        let map = new Map<string, number>();
+        let res = '';
+        for (const char of str.toLowerCase()) {
+            map.set(char, (map.get(char) || 0) + 1)
+        }
+        // console.log(map);
+        // map.forEach((key,value) =>{
+        //    res+=(`${value}${key}`); 
+        // });
+        // console.log(res);
+        // Show the counts
+        for (const [ch, count] of map) {
+            res += (`${ch}${map.get(ch)}`);
+        }
+        console.log(res);
+    });
+
+    test('Find the duplicate and unique in the string', () => {
+        let str = "My count is india";
+        str = str.replace(/\s/g, '');
+        const words = str.toLowerCase().split('');
+        let map = new Map<string, number>();
+        let duplicate = [];
+        let unique = [];
+        for (const word of words) {
+            map.set(word, (map.get(word) || 0) + 1);
+        }
+        for (const [key, value] of map) {
+            if (value > 1) {
+                // console.log(`${key},${value}`);
+                duplicate.push(key);
+            } else {
+                // console.log(`${key},${value}`);
+                unique.push(key);
+            }
+        }
+        console.log('Duplicates', duplicate.join(','));
+        console.log('Unique', unique.join(','));
+    });
+
+    test('Arrow function', () => {
+        // a more concise way to write function expressions in JavaScript
+        // The most obvious difference is the removal of the function keyword and the 
+        // addition of the "fat arrow" =>
+
+        // example 
+        const add = (a: number, b: number) => (a + b);
+        console.log(add(2, 3))
     })
 
 });
