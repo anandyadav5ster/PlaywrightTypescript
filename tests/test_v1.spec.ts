@@ -62,7 +62,7 @@ test('Read csv file', { tag: '@csv' }, async () => {
         skip_empty_lines: true,
         trim: true
     });
-    for (const record of records as Record<string,unknown>[]) {
+    for (const record of records as Record<string, unknown>[]) {
         console.log(`${record.username} and ${record.password}`);
     }
 });
@@ -91,6 +91,31 @@ test('Handle new tab', { tag: '@newTab' }, async ({ page, context }) => {
     const title = await newTab.title();
     console.log(title);
     await expect(newTab).toHaveTitle(title);
+});
+
+test('Handle broken links', async ({ page }) => {
+    await page.goto('https://testautomationpractice.blogspot.com/');
+    // get all the links
+    const links = await page.locator('#broken-links>a');
+    const alllinks = await links.all();
+    const allHrefs = await Promise.all(
+        alllinks.map(link => link.getAttribute('href'))
+    )
+
+
+    for (const url of allHrefs) {
+        if (!url || url.startsWith('#') || url.startsWith('mailto:')) continue;
+        try {
+        const response = await page.request.get(url);
+        if(response.status()>=400){
+            console.log(`❌ Broken Link: [${response.status()}] ${url}`);
+        }
+        expect.soft(response.ok(), `URL failed: ${url}`);
+        } catch {
+            expect.soft(false, `Could not reach URL: ${url}`);
+        }
+    }
+
 });
 
 

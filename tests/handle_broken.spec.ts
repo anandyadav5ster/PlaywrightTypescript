@@ -8,19 +8,18 @@ test('Handle broken links',{}, async({page}) =>{
     const allLinkHrefs = await Promise.all(
         allinks.map(link => link.getAttribute('href'))
     )
-      const validHrefs = allLinkHrefs.reduce((links, link) => {
-    // Filter out untruthy href, `mailto:` and `#` links.
-    if (link && !link?.startsWith("mailto:") && !link?.startsWith("#"))
-      links.add(link)
-    return links
-  }, new Set<string>())
+     
 
-for (const url of validHrefs){
-    try{
-        const response = await page.request.get(url);
-        expect.soft(`response.ok(), ${url} is valid}`);
-    } catch{
-            expect.soft(` ${url} is not valid}`);
+  for (const url of allLinkHrefs) {
+    if (!url || url.startsWith('#') || url.startsWith('mailto:')) continue;
+    try {
+    const response = await page.request.get(url);
+    if(response.status()>=400){
+        console.log(`❌ Broken Link: [${response.status()}] ${url}`);
+    }
+    expect.soft(response.ok(), `URL failed: ${url}`);
+    } catch {
+        expect.soft(false, `Could not reach URL: ${url}`);
     }
 }
 
