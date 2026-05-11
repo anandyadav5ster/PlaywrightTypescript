@@ -11,7 +11,7 @@ export class PlaywrightDevPage {
     }
 
     async gotoApplication(){
-        this.page.goto('https://playwright.dev/');
+       await this.page.goto('https://playwright.dev/');
     }
 
     async verifyHomePage(){
