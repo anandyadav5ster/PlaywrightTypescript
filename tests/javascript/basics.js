@@ -16,7 +16,7 @@ Because you renamed it to userage, the variable age is never actually created in
 To fix it:
 If you want to use the name age, simply don't use the colon:
 javascript
-let { age } = obj; 
+let { age } = obj;
 console.log(age); // 24
 
 
@@ -81,7 +81,8 @@ Then, the result is used in 1 || (result).
 
 2. Step-by-Step Execution
 Step A: Evaluate 2 && 3
-The && operator returns the first falsy value it encounters. If all values are truthy (which 2 and 3 are), it returns the last value.
+The && operator returns the first falsy value it encounters. If all values are truthy (which 2 and 3 are), 
+it returns the last value.
 
 2 is truthy, so it moves to the next operand.
 
@@ -214,6 +215,9 @@ str + num -> str */
 Array is always truthy value
 !True -> false
 [] --> ''--> false
+[] == ![] becomes [] == false
+[] == 0
+0 == 0 : True
  */
 
 // console.log(Boolean({}));  // true

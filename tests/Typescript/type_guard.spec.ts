@@ -1,6 +1,9 @@
-// In TypeScript, a Type Guard is a piece of logic that allows you to "narrow down" the type of a variable within a specific block of code.
+// In TypeScript, a Type Guard is a piece of logic that allows you to "narrow down" the type of a variable 
+// within a specific block of code.
 
-// Think of it as a checkpoint. If a variable could be a string or a number (a Union type), a Type Guard confirms which one it is so you can safely use string methods (like .toUpperCase()) or math operations without the compiler complaining.
+// Think of it as a checkpoint. If a variable could be a string or a number (a Union type), a 
+// Type Guard confirms which one it is so you can safely use string methods (like .toUpperCase()) or 
+// math operations without the compiler complaining.
 
 // 1. The Basic Type Guard (typeof)
 // This is the most common guard used for primitive types.
