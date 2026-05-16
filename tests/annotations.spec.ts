@@ -16,3 +16,5 @@ test('mark slow this test', async ({ page }) => {
 test.fixme('mark fixme this test', async ({ page }) => {
   console.log('fixme test')
 });
+
+// report will only fail and slow

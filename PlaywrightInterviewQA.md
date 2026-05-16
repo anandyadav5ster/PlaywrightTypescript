@@ -122,18 +122,61 @@ https://www.geeksforgeeks.org/system-design/singleton-design-pattern/
 >Pending Retest     
 >Retest     
 >Verified       
->Close      
+>Close
+======================================
+What are the top 5 Exception we get in Playwright?
+TimeoutError:
+This exception is thrown when a Playwright operation exceeds the specified timeout. It often occurs during actions like waiting for an element to be present, visible, or clickable within a defined time frame.
+Example Scenario: Waiting for an element that never becomes visible.
 
+ElementHandleError:
+This error is related to issues with interacting with a specific element on the page. It may occur if the element is not found, not visible, or not in the expected state.
+Example Scenario: Attempting to click on an element that is not present.
 
+PageError:
+PageError is a general error related to issues during interactions with a page. It can encompass various problems, such as navigating to an invalid URL or encountering problems with page content.
+Example Scenario: Navigating to a URL that does not exist.
+
+NetworkError:
+This exception occurs when there are issues with network-related operations, such as making HTTP requests. It can happen if a network resource fails to load, if there are connectivity issues, or if requests time out.
+Example Scenario: Failing to load a resource due to a network error.
+
+BrowserContextClosedError:
+This error is thrown when attempting to perform actions on a browser context that has already been closed. It typically happens if you try to interact with a page or browser instance after it has been closed.
+Example Scenario: Attempting to perform actions on a page after closing the browser.
+
+======================================================
 ## Types of Waits in Playwright
-> Wait for an element to disappear
-``` ts
-await loader.waitFor({ state: 'hidden', timeout: 15000 });
 
-await page.waitForURL(/.*dashboard/);
-await page.waitForLoadState('networkidle'); 
-await page.waitForResponse
 
+Auto-waiting: Playwright automatically waits for elements to be ready before performing actions.
+waitForSelector: Waits until a specific element appears or becomes visible in the DOM.
+await page.waitForSelector('#submit-button');
+await page.waitForSelector('#submit-button', 'hidden'); // always takes full locator not storing name and pass
+await user.waitFor({state:'visible'});
+await page.waitForNavigation();--> script pauses until page navigation is complete. It’s useful when testing page transitions, redirects, or any other action that triggers navigation.
+waitForLoadState: Waits for page load states like load, domcontentloaded, or networkidle.
+waitForResponse: Waits for a specific network response to complete.
+page.waitForResponse('https://www.bstackdemo.com/api/orders');
+waitForRequest: Waits for an outgoing network request to be sent.
+await page.waitForRequest(request => request.url() === 'https://www.bstackdemo.com/api/checkout');
+waitForURL: Waits until the page navigates to a specific URL.
+waitForFunction: Waits until a custom JavaScript condition evaluates to true.
+waitForTimeout (Hard wait):Forces a fixed delay and should be avoided except for debugging.
+
+==================================================
+Understanding Auto-Waiting in Playwright
+Playwright has built-in auto-waiting, meaning actions like clicking or typing automatically wait for the target element to be ready. This reduces the need for manual waits and simplifies the code, making tests more efficient.
+
+For example, a click action in Playwright automatically waits for the following conditions to be met:
+
+==========================================================
+Q Playwright assertions ?
+The locator can uniquely identify only one element
+The Element is visible
+The Element is stable,
+The element can receive Events (as in not behind any other elements)
+The element is Enabled
 expect(locator).toBeVisible()
 expect(locator).toBeHidden()
 expect(locator).toBeEnabled()
