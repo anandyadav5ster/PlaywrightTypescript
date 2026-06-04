@@ -1,0 +1,48 @@
+variables:
+  build_run: "dev"
+  is_package:
+    value: "false"
+    options:
+      - "false"
+      - "true"
+    description: "This will run when the package is false"
+  env_type:
+    value: "dev"
+    options:
+      - "dev"
+      - "stng"  
+    description: "Option to select the environment to execute the build"
+
+stages:
+  - "my-stage-1"
+  - "my-build stage"
+  - "my-test-stage" # This is where our tests will run
+
+my_sonar_check:
+  stage: "my-stage-1"
+  script:    
+    - echo "My job from stage"
+
+my_build_stage:
+  stage: "my-build stage"
+  rules:
+    - if: '$is_package == "false"'  
+  script:
+    - echo "My job build stage"
+    - echo "build_run:$build_run"
+    - echo "is_package:$is_package"
+
+# ADDED: The actual Playwright test execution job
+run_playwright_tests:
+  stage: "my-test-stage"
+  image: mcr.microsoft.com/playwright:v1.56.1-noble # Provides Node and browsers
+  script:
+    - npm ci # Installs your TypeScript/Playwright project dependencies
+    - xvfb-run npx playwright test
+  artifacts:
+    name: "playwright-report-$CI_COMMIT_REF_SLUG"
+    when: always # Ensures you get a report even if tests fail
+    expose_as: 'Playwright HTML Report' # Shows a direct link in the GitLab UI
+    paths:
+      - playwright-report/ # Captures the HTML report folder
+    expire_in: 30 days

@@ -1,0 +1,8 @@
+{
+  "compilerOptions": {
+    "target": "ES2015", /* Or "ES2022" depending on your runtime environment */
+    "module": "commonjs",
+    "strict": true,
+    "esModuleInterop": true
+  }
+}

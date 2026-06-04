@@ -1,0 +1,25 @@
+{
+  "cookies": [
+    {
+      "name": ".AspNetCore.Antiforgery.I-tat-yfLko",
+      "value": "CfDJ8PQabXp7q9lCoJDgFey0fjfLdVaRsR42Xjh5vUgKZnBvNeyfSLd9gsJk-ENQsKylmImrLRcdT1TBcRWvIKjhK0g7jIVb-vPWy6wWPvsbwgz6B4dpjQnH5DvU1qn-nJojF2-BRlHZ9X5_vk_nK0wATAc",
+      "domain": "admlucid.com",
+      "path": "/",
+      "expires": -1,
+      "httpOnly": true,
+      "secure": false,
+      "sameSite": "Strict"
+    },
+    {
+      "name": ".AspNetCore.Identity.Application",
+      "value": "CfDJ8PQabXp7q9lCoJDgFey0fjfUJGp5_YAmJ7RlfLtRECLcGexYLDAhNmo4V9XZ9dnUzCvQa3ozK-L9rETVhtPyNsneicfupC7Gx-1pqDP7xv3cm2bW7lNilKZS8KCDThz2FDPK330ycUlmWD8js-9OogNNyxKxliVIo-laYZLYmZqaoq8hz4MCJGMREKA9l3hTdUOIsNT2_b2dAuQMpE3eP2zX4MmNWglRjVke-H1COQZye9_ME3I5FyLvSqubZrdtTZZ9on0nBqWb4BmmV3qNn_6zNRIQ8uVoXnxu8t_FfRIp96nBBGG93y1UWCLsasqkoC2FlTWbtdf6HpyLPXj6ounaQVXfqCSaOIyY48fg96xlol4fonVZuahTdL8ErdPwMBtxBFS9nwd2dEF_fuJjj1M1KJuqRuUdqTN4YzNmtNgcVXfxFxxutouNx_tb5nSzx437rWI6ud7IXsBY6xTZDYn2ZBlmQR43jQRlXkP2nKUhMZ9R0prK0kZfiejR2Xcxa5N3Jm4bImweVy-nUtFl-MEzy9zChNmDuPh0ASDgNQzsT8iQDyywCFo8A0l0RSWIe0sT7CtJZfs6ree6lIvF5N5V7ERNIqP0DzI3wHOnrTNUz0kJbohfctjhvh43JAp3F1fV_dE1zpW0NXWN5DOi1QKwoMlf-J3t_4EsDZ8wb8V39BgDh9ZYvjBinUZciaZVXvuqBbiUOk_TNJkQwYuRYHYWu0vBWbNWTC2WND1Rmfna",
+      "domain": "admlucid.com",
+      "path": "/",
+      "expires": -1,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "Lax"
+    }
+  ],
+  "origins": []
+}

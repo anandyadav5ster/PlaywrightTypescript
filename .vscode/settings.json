@@ -1,0 +1,11 @@
+{
+    "editor.guides.highlightActiveIndentation": false,
+    "editor.detectIndentation": false,
+    "chat.mcp.serverSampling": {
+        "PlaywrightTypescript/.vscode/mcp.json: microsoft/playwright-mcp": {
+            "allowedModels": [
+                "claude-code/claude-haiku-4.5"
+            ]
+        }
+    }
+}

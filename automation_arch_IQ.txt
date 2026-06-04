@@ -1,0 +1,9 @@
+Q the role of an automation architect ?
+Ans: the role of an automation architect is
+to design and Implement automated
+testing solutions that enhance software
+quality and accelerate the delivery
+process this includes identifying the
+right tools and Technologies for
+automation creating automation
+Frameworks establishing best practices
